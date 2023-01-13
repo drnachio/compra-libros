@@ -21,11 +21,6 @@ import {
   PhoneIcon,
 } from "@heroicons/react/20/solid";
 
-const user = {
-  name: "Tom Cook",
-  imageUrl:
-    "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-};
 const navigation = [
   { name: "Inicio", href: "#", icon: HomeIcon, current: false },
   { name: "Autores", href: "#", icon: UserGroupIcon, current: false },
@@ -44,8 +39,6 @@ const profile = {
   name: "Ricardo Cooper",
   imageUrl:
     "https://images.unsplash.com/photo-1463453091185-61582044d556?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80",
-  coverImageUrl:
-    "https://images.unsplash.com/photo-1444628838545-ac4016a5418a?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80",
   about: `
     <p>Tincidunt quam neque in cursus viverra orci, dapibus nec tristique. Nullam ut sit dolor consectetur urna, dui cras nec sed. Cursus risus congue arcu aenean posuere aliquam.</p>
     <p>Et vivamus lorem pulvinar nascetur non. Pulvinar a sed platea rhoncus ac mauris amet. Urna, sem pretium sit pretium urna, senectus vitae. Scelerisque fermentum, cursus felis dui suspendisse velit pharetra. Augue et duis cursus maecenas eget quam lectus. Accumsan vitae nascetur pharetra rhoncus praesent dictum risus suspendisse.</p>
@@ -418,29 +411,6 @@ export default function Example() {
                       </div>
                     </nav>
                   </div>
-                  <div className="flex flex-shrink-0 border-t border-gray-200 p-4">
-                    <a href="#" className="group block flex-shrink-0">
-                      <div className="flex items-center">
-                        <div>
-                          <Image
-                            className="inline-block h-10 w-10 rounded-full"
-                            src={user.imageUrl}
-                            alt=""
-                            width={40}
-                            height={40}
-                          />
-                        </div>
-                        <div className="ml-3">
-                          <p className="text-base font-medium text-gray-700 group-hover:text-gray-900">
-                            {user.name}
-                          </p>
-                          <p className="text-sm font-medium text-gray-500 group-hover:text-gray-700">
-                            View profile
-                          </p>
-                        </div>
-                      </div>
-                    </a>
-                  </div>
                 </Dialog.Panel>
               </Transition.Child>
               <div className="w-14 flex-shrink-0" aria-hidden="true">
@@ -514,29 +484,6 @@ export default function Example() {
                   </div>
                 </nav>
               </div>
-              <div className="flex flex-shrink-0 border-t border-gray-200 p-4">
-                <a href="#" className="group block w-full flex-shrink-0">
-                  <div className="flex items-center">
-                    <div>
-                      <Image
-                        className="inline-block h-9 w-9 rounded-full"
-                        src={user.imageUrl}
-                        width={36}
-                        height={36}
-                        alt=""
-                      />
-                    </div>
-                    <div className="ml-3">
-                      <p className="text-sm font-medium text-gray-700 group-hover:text-gray-900">
-                        {user.name}
-                      </p>
-                      <p className="text-xs font-medium text-gray-500 group-hover:text-gray-700">
-                        View profile
-                      </p>
-                    </div>
-                  </div>
-                </a>
-              </div>
             </div>
           </div>
         </div>
@@ -546,12 +493,13 @@ export default function Example() {
               <div>
                 <Image
                   className="h-8 w-auto"
-                  src="/logo.svg"
+                  src="/fav.svg"
                   alt="Compra Libros"
                   width={32}
                   height={32}
                 />
               </div>
+              <h2 className="text-xl font-bold">Compra Libros</h2>
               <div>
                 <button
                   type="button"
@@ -586,15 +534,7 @@ export default function Example() {
               <article>
                 {/* Profile header */}
                 <div>
-                  <div>
-                    <Image
-                      className="h-32 w-full object-cover lg:h-48"
-                      src={profile.coverImageUrl}
-                      width={195 * 2}
-                      height={130 * 2}
-                      alt=""
-                    />
-                  </div>
+                  <div className="h-32 w-full bg-gradient-to-br from-pink-300 via-purple-300 to-indigo-400"></div>
                   <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
                     <div className="-mt-12 sm:-mt-16 sm:flex sm:items-end sm:space-x-5">
                       <div className="flex">

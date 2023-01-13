@@ -3,8 +3,11 @@
     "headlessui",
     "heroicons",
     "nlwthro",
+    "superjson",
     "tailwindcss",
     "tailwindui",
+    "tanstack",
+    "trpc",
     "TRPC",
     "unsplash"
   ]
