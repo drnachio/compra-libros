@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Capa_2" data-name="Capa 2" xmlns="http://www.w3.org/2000/svg"
+  xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 478.64 368.22">
+  <defs>
+    <style>
+      .cls-1 {
+      fill: url(#linear-gradient-2);
+      }
+
+      .cls-2 {
+      fill: #941e81;
+      font-size: 60px;
+      }
+
+      .cls-2, .cls-3 {
+      font-family: Ubuntu-Bold, Ubuntu;
+      font-weight: 700;
+      }
+
+      .cls-4 {
+      fill: url(#linear-gradient-6);
+      }
+
+      .cls-5 {
+      letter-spacing: 0em;
+      }
+
+      .cls-6 {
+      fill: url(#linear-gradient-5);
+      }
+
+      .cls-7 {
+      letter-spacing: -.02em;
+      }
+
+      .cls-3 {
+      fill: #29265b;
+      font-size: 134px;
+      }
+
+      .cls-8 {
+      fill: url(#linear-gradient-7);
+      }
+
+      .cls-9 {
+      fill: url(#linear-gradient-3);
+      }
+
+      .cls-10 {
+      fill: url(#linear-gradient);
+      }
+
+      .cls-11 {
+      fill: url(#linear-gradient-4);
+      }
+    </style>
+    <linearGradient id="linear-gradient" x1="-51.52" y1="209.09" x2="405.92" y2="-115.85"
+      gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#941e81" />
+      <stop offset="1" stop-color="#29265b" />
+    </linearGradient>
+    <linearGradient id="linear-gradient-2" x1="-18.02" y1="256.26" x2="439.43" y2="-68.69"
+      xlink:href="#linear-gradient" />
+    <linearGradient id="linear-gradient-3" x1="15.49" y1="303.43" x2="472.94" y2="-21.51"
+      xlink:href="#linear-gradient" />
+    <linearGradient id="linear-gradient-4" x1="23.06" y1="314.08" x2="480.5" y2="-10.87"
+      xlink:href="#linear-gradient" />
+    <linearGradient id="linear-gradient-5" x1="56.56" y1="361.25" x2="514.01" y2="36.31"
+      xlink:href="#linear-gradient" />
+    <linearGradient id="linear-gradient-6" x1="90.07" y1="408.42" x2="547.51" y2="83.47"
+      xlink:href="#linear-gradient" />
+    <linearGradient id="linear-gradient-7" x1="19.27" y1="308.75" x2="476.72" y2="-16.19"
+      xlink:href="#linear-gradient" />
+  </defs>
+  <g id="Layer_1" data-name="Layer 1">    
+    <g>
+      <path class="cls-10"
+        d="m195.57,70.97H63.62c-5.23,0-9.46,4.24-9.46,9.46s4.24,9.46,9.46,9.46h131.95c5.23,0,9.46-4.24,9.46-9.46s-4.24-9.46-9.46-9.46Z" />
+      <path class="cls-1"
+        d="m195.57,141.94H63.62c-5.23,0-9.46,4.24-9.46,9.46s4.24,9.46,9.46,9.46h131.95c5.23,0,9.46-4.24,9.46-9.46s-4.24-9.46-9.46-9.46Z" />
+      <path class="cls-9"
+        d="m195.57,212.92H63.62c-5.23,0-9.46,4.24-9.46,9.46s4.24,9.46,9.46,9.46h131.95c5.23,0,9.46-4.24,9.46-9.46s-4.24-9.46-9.46-9.46Z" />
+      <path class="cls-11"
+        d="m276.53,80.44c0,5.23,4.24,9.46,9.46,9.46h131.95c5.23,0,9.46-4.24,9.46-9.46s-4.24-9.46-9.46-9.46h-131.95c-5.23,0-9.46,4.24-9.46,9.46Z" />
+      <path class="cls-6"
+        d="m417.94,141.94h-131.95c-5.23,0-9.46,4.24-9.46,9.46s4.24,9.46,9.46,9.46h131.95c5.23,0,9.46-4.24,9.46-9.46s-4.24-9.46-9.46-9.46Z" />
+      <path class="cls-4"
+        d="m417.94,212.92h-131.95c-5.23,0-9.46,4.24-9.46,9.46s4.24,9.46,9.46,9.46h131.95c5.23,0,9.46-4.24,9.46-9.46s-4.24-9.46-9.46-9.46Z" />
+      <path class="cls-8"
+        d="m463.16,0h-182.07c-16.56,0-31.25,8.14-40.31,20.63C231.73,8.14,217.04,0,200.47,0H18.4c-5.23,0-9.46,4.24-9.46,9.46v283.89c0,2.51,1,4.92,2.77,6.69,1.77,1.77,4.18,2.77,6.69,2.77h69.85s33.15,57.41,33.15,57.41c1.69,2.93,4.81,4.73,8.2,4.73s6.51-1.8,8.2-4.73l33.14-57.41h29.54c16.56,0,31.25-8.14,40.31-20.62,9.05,12.48,23.74,20.62,40.31,20.62h29.54l33.14,57.41c1.69,2.93,4.81,4.73,8.2,4.73s6.5-1.8,8.19-4.73l33.15-57.41h69.85c2.51,0,4.92-.99,6.69-2.77,1.77-1.77,2.77-4.18,2.77-6.69V9.46c0-5.23-4.24-9.46-9.46-9.46Zm-231.84,253.05c0,17.01-13.84,30.84-30.84,30.84h-35.01c-3.38,0-6.5,1.8-8.19,4.73l-27.68,47.94-27.68-47.95c-1.69-2.93-4.82-4.73-8.2-4.73H27.86s0-264.96,0-264.96h172.61c17.01,0,30.84,13.84,30.84,30.84v203.28Zm222.38,30.84h-65.85c-3.38,0-6.51,1.8-8.2,4.73l-27.68,47.95-27.68-47.94c-1.69-2.93-4.82-4.73-8.2-4.73h-35c-17.01,0-30.84-13.84-30.84-30.84V49.77c0-17.01,13.83-30.84,30.84-30.84h172.61v264.96Z" />
+    </g>
+  </g>
+</svg>
