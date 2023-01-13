@@ -366,6 +366,8 @@ export default function Example() {
                         className="h-8 w-auto"
                         src="/logo.svg"
                         alt="Compra Libros"
+                        width={32}
+                        height={32}
                       />
                     </div>
                     <nav aria-label="Sidebar" className="mt-5">
@@ -424,6 +426,8 @@ export default function Example() {
                             className="inline-block h-10 w-10 rounded-full"
                             src={user.imageUrl}
                             alt=""
+                            width={40}
+                            height={40}
                           />
                         </div>
                         <div className="ml-3">
@@ -457,6 +461,8 @@ export default function Example() {
                     className="h-8 w-auto"
                     src="/fav.svg"
                     alt="Compra Libros"
+                    width={32}
+                    height={32}
                   />
                   <h1 className="ml-4 text-xl font-bold">Compra Libros</h1>
                 </div>
@@ -515,6 +521,8 @@ export default function Example() {
                       <Image
                         className="inline-block h-9 w-9 rounded-full"
                         src={user.imageUrl}
+                        width={36}
+                        height={36}
                         alt=""
                       />
                     </div>
@@ -540,6 +548,8 @@ export default function Example() {
                   className="h-8 w-auto"
                   src="https://tailwindui.com/img/logos/mark.svg?color=pink&shade=500"
                   alt="Your Company"
+                  width={32}
+                  height={32}
                 />
               </div>
               <div>
@@ -580,6 +590,8 @@ export default function Example() {
                     <Image
                       className="h-32 w-full object-cover lg:h-48"
                       src={profile.coverImageUrl}
+                      width={1950}
+                      height={192}
                       alt=""
                     />
                   </div>
@@ -589,6 +601,8 @@ export default function Example() {
                         <Image
                           className="h-24 w-24 rounded-full ring-4 ring-white sm:h-32 sm:w-32"
                           src={profile.imageUrl}
+                          width={96}
+                          height={96}
                           alt=""
                         />
                       </div>
@@ -695,6 +709,8 @@ export default function Example() {
                           <Image
                             className="h-10 w-10 rounded-full"
                             src={person.imageUrl}
+                            width={40}
+                            height={40}
                             alt=""
                           />
                         </div>
@@ -781,6 +797,8 @@ export default function Example() {
                                 className="h-10 w-10 rounded-full"
                                 src={person.imageUrl}
                                 alt=""
+                                width={40}
+                                height={40}
                               />
                             </div>
                             <div className="min-w-0 flex-1">
