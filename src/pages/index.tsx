@@ -546,8 +546,8 @@ export default function Example() {
               <div>
                 <Image
                   className="h-8 w-auto"
-                  src="https://tailwindui.com/img/logos/mark.svg?color=pink&shade=500"
-                  alt="Your Company"
+                  src="/logo.svg"
+                  alt="Compra Libros"
                   width={32}
                   height={32}
                 />
@@ -590,8 +590,8 @@ export default function Example() {
                     <Image
                       className="h-32 w-full object-cover lg:h-48"
                       src={profile.coverImageUrl}
-                      width={1950}
-                      height={192}
+                      width={195 * 2}
+                      height={130 * 2}
                       alt=""
                     />
                   </div>
