@@ -13,5 +13,24 @@ const config = {
     locales: ["en"],
     defaultLocale: "en",
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "images.unsplash.com",
+        port: "",
+      },
+      {
+        protocol: "https",
+        hostname: "tailwindui.com",
+        port: "",
+      },
+      {
+        protocol: "https",
+        hostname: "d1s0xh0nlwthro.cloudfront.net",
+        port: "",
+      },
+    ],
+  },
 };
 export default config;
