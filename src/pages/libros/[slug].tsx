@@ -17,7 +17,6 @@ import staticSsgHelper from '../../server/staticSsgHelper';
 import Head from 'next/head';
 import getImageUrlFromFile from '../../utils/getImageUrlFromFile';
 import ImageFromFile from '../../components/ImageFromFile';
-import MarkDown from '../../components/Markdown';
 import Markdown from '../../components/Markdown';
 
 function classNames(...classes: string[]) {
