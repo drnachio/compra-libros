@@ -165,7 +165,7 @@ const Layout: React.FC<Props> = ({children}) => {
               <div className="flex flex-1 flex-col overflow-y-auto pt-5 pb-4">
                 <div className="flex flex-shrink-0 items-center px-4">
                   <Image
-                    className="h-8 w-auto"
+                    className="h-8 w-8"
                     src="/fav.svg"
                     alt="Compra Libros"
                     width={32}
@@ -229,7 +229,7 @@ const Layout: React.FC<Props> = ({children}) => {
             <div className="flex items-center justify-between border-b border-gray-200 bg-gray-50 px-4 py-1.5">
               <div>
                 <Image
-                  className="h-8 w-auto"
+                  className="h-8 w-8"
                   src="/fav.svg"
                   alt="Compra Libros"
                   width={32}
