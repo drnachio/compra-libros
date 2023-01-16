@@ -1,8 +1,8 @@
-import Image from "next/image";
+import Image from 'next/image';
 
-import { FunnelIcon, MagnifyingGlassIcon } from "@heroicons/react/20/solid";
+import { FunnelIcon, MagnifyingGlassIcon } from '@heroicons/react/20/solid';
 
-import { directory } from "../data/data";
+import { directory } from '../data/data';
 
 const ListOfBooks: React.FC = () => (
   <aside className="hidden w-96 flex-shrink-0 border-r border-gray-200 xl:order-first xl:flex xl:flex-col">

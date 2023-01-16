@@ -1,6 +1,6 @@
-import { Fragment, useState } from "react";
-import { Dialog, Transition } from "@headlessui/react";
-import Image from "next/image";
+import { Fragment, useState } from 'react';
+import { Dialog, Transition } from '@headlessui/react';
+import Image from 'next/image';
 
 import {
   Bars3Icon,
@@ -12,27 +12,27 @@ import {
   XMarkIcon,
   BookOpenIcon,
   HomeModernIcon,
-} from "@heroicons/react/24/outline";
+} from '@heroicons/react/24/outline';
 
 const navigation = [
-  { name: "Inicio", href: "#", icon: HomeIcon, current: false },
-  { name: "Autores", href: "#", icon: UserGroupIcon, current: false },
-  { name: "Editoriales", href: "#", icon: HomeModernIcon, current: false },
-  { name: "Libros", href: "#", icon: BookOpenIcon, current: true },
-  { name: "Temas", href: "#", icon: MapIcon, current: false },
-  { name: "Notificaciones", href: "#", icon: MegaphoneIcon, current: false },
+  { name: 'Inicio', href: '#', icon: HomeIcon, current: false },
+  { name: 'Autores', href: '#', icon: UserGroupIcon, current: false },
+  { name: 'Editoriales', href: '#', icon: HomeModernIcon, current: false },
+  { name: 'Libros', href: '#', icon: BookOpenIcon, current: true },
+  { name: 'Temas', href: '#', icon: MapIcon, current: false },
+  { name: 'Notificaciones', href: '#', icon: MegaphoneIcon, current: false },
 ];
-const secondaryNavigation = [{ name: "Ajustes", href: "#", icon: CogIcon }];
+const secondaryNavigation = [{ name: 'Ajustes', href: '#', icon: CogIcon }];
 
 function classNames(...classes: string[]) {
-  return classes.filter(Boolean).join(" ");
+  return classes.filter(Boolean).join(' ');
 }
 
 type Props = {
-  children: React.ReactNode
+  children: React.ReactNode;
 };
 
-const Layout: React.FC<Props> = ({children}) => {
+const Layout: React.FC<Props> = ({ children }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
@@ -108,18 +108,18 @@ const Layout: React.FC<Props> = ({children}) => {
                             href={item.href}
                             className={classNames(
                               item.current
-                                ? "bg-gray-100 text-gray-900"
-                                : "text-gray-600 hover:bg-gray-50 hover:text-gray-900",
-                              "group flex items-center rounded-md px-2 py-2 text-base font-medium"
+                                ? 'bg-gray-100 text-gray-900'
+                                : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900',
+                              'group flex items-center rounded-md px-2 py-2 text-base font-medium',
                             )}
-                            aria-current={item.current ? "page" : undefined}
+                            aria-current={item.current ? 'page' : undefined}
                           >
                             <item.icon
                               className={classNames(
                                 item.current
-                                  ? "text-gray-500"
-                                  : "text-gray-400 group-hover:text-gray-500",
-                                "mr-4 h-6 w-6"
+                                  ? 'text-gray-500'
+                                  : 'text-gray-400 group-hover:text-gray-500',
+                                'mr-4 h-6 w-6',
                               )}
                               aria-hidden="true"
                             />
@@ -181,18 +181,18 @@ const Layout: React.FC<Props> = ({children}) => {
                         href={item.href}
                         className={classNames(
                           item.current
-                            ? "bg-gray-200 text-gray-900"
-                            : "text-gray-600 hover:bg-gray-50 hover:text-gray-900",
-                          "group flex items-center rounded-md px-2 py-2 text-sm font-medium"
+                            ? 'bg-gray-200 text-gray-900'
+                            : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900',
+                          'group flex items-center rounded-md px-2 py-2 text-sm font-medium',
                         )}
-                        aria-current={item.current ? "page" : undefined}
+                        aria-current={item.current ? 'page' : undefined}
                       >
                         <item.icon
                           className={classNames(
                             item.current
-                              ? "text-gray-500"
-                              : "text-gray-400 group-hover:text-gray-500",
-                            "mr-3 h-6 w-6 flex-shrink-0"
+                              ? 'text-gray-500'
+                              : 'text-gray-400 group-hover:text-gray-500',
+                            'mr-3 h-6 w-6 flex-shrink-0',
                           )}
                           aria-hidden="true"
                         />
@@ -256,6 +256,6 @@ const Layout: React.FC<Props> = ({children}) => {
       </div>
     </>
   );
-}
+};
 
 export default Layout;

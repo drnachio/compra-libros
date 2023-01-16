@@ -1,6 +1,6 @@
-import { z } from "zod";
+import { z } from 'zod';
 
-import { createTRPCRouter, publicProcedure } from "../trpc";
+import { createTRPCRouter, publicProcedure } from '../trpc';
 
 export const booksRouter = createTRPCRouter({
   getBookBySlug: publicProcedure
@@ -9,6 +9,42 @@ export const booksRouter = createTRPCRouter({
       const result = await ctx.prisma.books.findFirst({
         select: {
           title: true,
+          description: true,
+          tags: true,
+          article: true,
+          coverImage: {
+            select: {
+              filename_disk: true,
+              width: true,
+              height: true,
+              title: true,
+            },
+          },
+          publishers: {
+            select: {
+              slug: true,
+              name: true,
+            }
+          },
+          authors: {
+            select: {
+              authors: {
+                select: {
+                  slug: true,
+                  firstName: true,
+                  lastName: true,
+                  pictureFile: {
+                    select: {
+                      filename_disk: true,
+                      width: true,
+                      height: true,
+                      title: true,
+                    },
+                  }
+                }
+              }
+            }
+          }
         },
         where: {
           slug: input.slug,

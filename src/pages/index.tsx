@@ -1,17 +1,17 @@
-import Image from "next/image";
+import Image from 'next/image';
 
 import {
   ChevronLeftIcon,
   EnvelopeIcon,
   PhoneIcon,
-} from "@heroicons/react/20/solid";
+} from '@heroicons/react/20/solid';
 
-import Layout from "../components/Layout";
-import { profile, team, tabs } from "../data/data";
-import ListOfBooks from "../components/ListOfBooks";
+import Layout from '../components/Layout';
+import { profile, team, tabs } from '../data/data';
+import ListOfBooks from '../components/ListOfBooks';
 
 function classNames(...classes: string[]) {
-  return classes.filter(Boolean).join(" ");
+  return classes.filter(Boolean).join(' ');
 }
 
 const index: React.FC = () => (
@@ -98,11 +98,11 @@ const index: React.FC = () => (
                     href={tab.href}
                     className={classNames(
                       tab.current
-                        ? "border-pink-500 text-gray-900"
-                        : "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700",
-                      "whitespace-nowrap border-b-2 py-4 px-1 text-sm font-medium"
+                        ? 'border-pink-500 text-gray-900'
+                        : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700',
+                      'whitespace-nowrap border-b-2 py-4 px-1 text-sm font-medium',
                     )}
-                    aria-current={tab.current ? "page" : undefined}
+                    aria-current={tab.current ? 'page' : undefined}
                   >
                     {tab.name}
                   </a>
