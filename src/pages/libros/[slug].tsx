@@ -168,7 +168,7 @@ const Libro: React.FC<PropsType> = ({ slug }) => {
                   Descripción del editor
                 </dt>
                 <dd>
-                  <Markdown>{bookDetails.data?.description || ''}</Markdown>
+                  <Markdown>{bookDetails.data?.abstract || ''}</Markdown>
                 </dd>
               </div>
             </dl>
