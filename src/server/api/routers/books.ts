@@ -3,6 +3,42 @@ import { z } from 'zod';
 import { createTRPCRouter, publicProcedure } from '../trpc';
 
 export const booksRouter = createTRPCRouter({
+  getAllBooks: publicProcedure.query(
+    async ({ ctx }) => {
+      const result = await ctx.prisma.books.findMany({
+        select: {
+          title: true,
+          slug: true,
+          coverImage: {
+            select: {
+              filename_disk: true,
+              width: true,
+              height: true,
+              title: true,
+            },
+          },
+          authors: {
+            select: {
+              authors: {
+                select: {
+                  slug: true,
+                  firstName: true,
+                  lastName: true,
+                }
+              }
+            }
+          },
+        },
+        orderBy: {
+          title: 'asc',
+        },
+        where: {
+          status: 'published'
+        },
+      });
+      return result;
+    }
+  ),
   getBookBySlug: publicProcedure
     .input(z.object({ slug: z.string() }))
     .query(async ({ input, ctx }) => {
