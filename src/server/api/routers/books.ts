@@ -49,6 +49,7 @@ export const booksRouter = createTRPCRouter({
           keyPoints: true,
           tags: true,
           article: true,
+          abstract: true,
           coverImage: {
             select: {
               filename_disk: true,
