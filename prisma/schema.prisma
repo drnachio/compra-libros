@@ -526,24 +526,25 @@ model VerificationToken {
 }
 
 model booksVersions {
-  id             String          @id @db.Uuid
-  status         String?         @default("published") @db.String(255)
-  sort           Int?
-  user_created   String?         @db.Uuid
-  date_created   DateTime?       @db.Timestamptz(6)
-  user_updated   String?         @db.Uuid
-  date_updated   DateTime?       @db.Timestamptz(6)
-  isbn10         String?         @db.String(255)
-  isbn13         String?         @db.String(255)
-  book           String?         @db.Uuid
-  type           String?         @db.String(255)
-  editionNumber  Int?            @default(1)
-  editionDate    DateTime?       @db.Date
-  weight         Int?
-  dimensions     String?         @db.String(255)
-  fileSize       Int?
-  asin           String?         @db.String(255)
-  pages          Int?
-  books          books?          @relation(fields: [book], references: [id], onUpdate: NoAction, map: "booksversions_book_foreign_replaced")
-  directus_users directus_users? @relation(fields: [user_updated], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "booksversions_user_updated_foreign")
+  id                 String          @id @db.Uuid
+  status             String?         @default("published") @db.String(255)
+  sort               Int?
+  user_created       String?         @db.Uuid
+  date_created       DateTime?       @db.Timestamptz(6)
+  user_updated       String?         @db.Uuid
+  date_updated       DateTime?       @db.Timestamptz(6)
+  isbn10             String?         @db.String(255)
+  isbn13             String?         @db.String(255)
+  book               String?         @db.Uuid
+  type               String?         @db.String(255)
+  editionNumber      Int?            @default(1)
+  editionDate        DateTime?       @db.Date
+  weight             Int?
+  dimensions         String?         @db.String(255)
+  fileSize           Int?
+  asin               String?         @db.String(255)
+  pages              Int?
+  amazonAffiliateURL String?         @db.String(255)
+  books              books?          @relation(fields: [book], references: [id], onUpdate: NoAction, map: "booksversions_book_foreign_replaced")
+  updatedBy          directus_users? @relation(fields: [user_updated], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "booksversions_user_updated_foreign")
 }
