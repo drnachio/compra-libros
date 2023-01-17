@@ -10,6 +10,7 @@ export const booksRouter = createTRPCRouter({
         select: {
           title: true,
           description: true,
+          keyPoints: true,
           tags: true,
           article: true,
           coverImage: {
@@ -24,7 +25,7 @@ export const booksRouter = createTRPCRouter({
             select: {
               slug: true,
               name: true,
-            }
+            },
           },
           authors: {
             select: {
@@ -40,11 +41,11 @@ export const booksRouter = createTRPCRouter({
                       height: true,
                       title: true,
                     },
-                  }
-                }
-              }
-            }
-          }
+                  },
+                },
+              },
+            },
+          },
         },
         where: {
           slug: input.slug,

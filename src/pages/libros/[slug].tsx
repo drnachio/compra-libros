@@ -152,10 +152,24 @@ const Libro: React.FC<PropsType> = ({ slug }) => {
                 </div>
               ))}
               <div className="sm:col-span-2">
-                <dt className="text-sm font-medium text-gray-500">Comentario</dt>
-                <Markdown>
-                  {bookDetails.data?.article || ''}
-                </Markdown>
+                <dt className="text-sm font-medium text-gray-500">
+                  Comentario
+                </dt>
+                <dd>
+                  <Markdown>{bookDetails.data?.article || ''}</Markdown>
+                </dd>
+                <dt className="text-sm font-medium text-gray-500">
+                  Principales razones para leerlo
+                </dt>
+                <dd>
+                  <Markdown>{bookDetails.data?.keyPoints || ''}</Markdown>
+                </dd>
+                <dt className="text-sm font-medium text-gray-500">
+                  Descripción del editor
+                </dt>
+                <dd>
+                  <Markdown>{bookDetails.data?.description || ''}</Markdown>
+                </dd>
               </div>
             </dl>
           </div>
