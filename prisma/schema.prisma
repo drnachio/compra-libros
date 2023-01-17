@@ -8,24 +8,24 @@ datasource db {
 }
 
 model authors {
-  id             String          @id @db.Uuid
-  status         String          @default("draft") @db.String(255)
-  sort           Int?
-  user_created   String?         @db.Uuid
-  date_created   DateTime?       @db.Timestamptz(6)
-  user_updated   String?         @db.Uuid
-  date_updated   DateTime?       @db.Timestamptz(6)
-  firstName      String?
-  lastName       String?
-  slug           String?         @db.String(255)
-  biography      String?
-  picture        String?         @db.Uuid
-  content        String?
-  description    String?
-  tags           Json?
-  pictureFile directus_files? @relation(fields: [picture], references: [id], onUpdate: NoAction, map: "authors_picture_foreign")
-  createdBy directus_users? @relation(fields: [user_created], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "authors_user_created_foreign")
-  books  books_authors[]
+  id           String          @id @db.Uuid
+  status       String          @default("draft") @db.String(255)
+  sort         Int?
+  user_created String?         @db.Uuid
+  date_created DateTime?       @db.Timestamptz(6)
+  user_updated String?         @db.Uuid
+  date_updated DateTime?       @db.Timestamptz(6)
+  firstName    String?
+  lastName     String?
+  slug         String?         @db.String(255)
+  biography    String?
+  picture      String?         @db.Uuid
+  content      String?
+  description  String?
+  tags         Json?
+  pictureFile  directus_files? @relation(fields: [picture], references: [id], onUpdate: NoAction, map: "authors_picture_foreign")
+  createdBy    directus_users? @relation(fields: [user_created], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "authors_user_created_foreign")
+  books        books_authors[]
 }
 
 model books {
@@ -45,7 +45,8 @@ model books {
   description    String?
   tags           Json?
   article        String?
-  coverImage      directus_files? @relation(fields: [cover], references: [id], onUpdate: NoAction, map: "books_cover_foreign")
+  keyPoints      String?
+  coverImage     directus_files? @relation(fields: [cover], references: [id], onUpdate: NoAction, map: "books_cover_foreign")
   publishers     publishers?     @relation(fields: [publisher], references: [id], onUpdate: NoAction, map: "books_publisher_foreign")
   directus_users directus_users? @relation(fields: [user_created], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "books_user_created_foreign")
   authors        books_authors[]

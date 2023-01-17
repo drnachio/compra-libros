@@ -31,10 +31,10 @@ const markdownComponents = {
     <h4 className="text-lg font-semibold">{children}</h4>
   ),
   ul: ({ children }: { children?: ReactNode }): JSX.Element => (
-    <ul className="list-disc">{children}</ul>
+    <ul className="mt-5 list-disc">{children}</ul>
   ),
   li: ({ children }: { children?: ReactNode }): JSX.Element => (
-    <li className="mt-2 ml-5">{children}</li>
+    <li className="mb-2 ml-5">{children}</li>
   ),
   a: ({
     children,

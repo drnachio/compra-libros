@@ -70,7 +70,7 @@ const Libro: React.FC<PropsType> = ({ slug }) => {
           </a>
         </nav>
 
-        <article>
+        <article className="overflow-y-auto h-screen pb-20 md:pb-4">
           {/* Profile header */}
           <div>
             <div className="h-32 w-full bg-gradient-to-br from-pink-300 via-purple-300 to-indigo-400"></div>
@@ -152,10 +152,24 @@ const Libro: React.FC<PropsType> = ({ slug }) => {
                 </div>
               ))}
               <div className="sm:col-span-2">
-                <dt className="text-sm font-medium text-gray-500">Comentario</dt>
-                <Markdown>
-                  {bookDetails.data?.article || ''}
-                </Markdown>
+                <dt className="text-xl font-bold text-gray-900">
+                  Comentario
+                </dt>
+                <dd>
+                  <Markdown>{bookDetails.data?.article || ''}</Markdown>
+                </dd>
+                <dt className="text-xl font-bold text-gray-900 mt-6">
+                  Principales razones para leerlo
+                </dt>
+                <dd>
+                  <Markdown>{bookDetails.data?.keyPoints || ''}</Markdown>
+                </dd>
+                <dt className="text-xl font-bold text-gray-900 mt-6">
+                  Descripción del editor
+                </dt>
+                <dd>
+                  <Markdown>{bookDetails.data?.description || ''}</Markdown>
+                </dd>
               </div>
             </dl>
           </div>
