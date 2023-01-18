@@ -40,7 +40,6 @@ model books {
   abstract       String?
   slug           String?         @db.String(255)
   cover          String?         @db.Uuid
-  pages          Int?
   publisher      String?         @db.Uuid
   description    String?
   tags           Json?
@@ -49,6 +48,7 @@ model books {
   coverImage     directus_files? @relation(fields: [cover], references: [id], onUpdate: NoAction, map: "books_cover_foreign")
   publishers     publishers?     @relation(fields: [publisher], references: [id], onUpdate: NoAction, map: "books_publisher_foreign")
   directus_users directus_users? @relation(fields: [user_created], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "books_user_created_foreign")
+  booksVersions  booksVersions[]
   authors        books_authors[]
 }
 
@@ -409,6 +409,7 @@ model directus_users {
   language                                                                String?                  @db.String(255)
   authors                                                                 authors[]
   books                                                                   books[]
+  booksVersions                                                           booksVersions[]
   directus_dashboards                                                     directus_dashboards[]
   directus_files_directus_files_modified_byTodirectus_users               directus_files[]         @relation("directus_files_modified_byTodirectus_users")
   directus_files_directus_files_uploaded_byTodirectus_users               directus_files[]         @relation("directus_files_uploaded_byTodirectus_users")
@@ -459,7 +460,7 @@ model editors {
 
 model publishers {
   id             String          @id @db.Uuid
-  status         String          @default("draft") @db.String(255)
+  status         String?         @default("published") @db.String(255)
   sort           Int?
   user_created   String?         @db.Uuid
   date_created   DateTime?       @db.Timestamptz(6)
@@ -522,4 +523,28 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+}
+
+model booksVersions {
+  id                 String          @id @db.Uuid
+  status             String?         @default("published") @db.String(255)
+  sort               Int?
+  user_created       String?         @db.Uuid
+  date_created       DateTime?       @db.Timestamptz(6)
+  user_updated       String?         @db.Uuid
+  date_updated       DateTime?       @db.Timestamptz(6)
+  isbn10             String?         @db.String(255)
+  isbn13             String?         @db.String(255)
+  book               String?         @db.Uuid
+  type               String?         @db.String(255)
+  editionNumber      Int?
+  editionDate        DateTime?       @db.Date
+  weight             Int?
+  dimensions         String?         @db.String(255)
+  fileSize           Int?
+  asin               String?         @db.String(255)
+  pages              Int?
+  amazonAffiliateURL String?         @db.String(255)
+  books              books?          @relation(fields: [book], references: [id], onUpdate: NoAction, map: "booksversions_book_foreign_replaced")
+  updatedBy          directus_users? @relation(fields: [user_updated], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "booksversions_user_updated_foreign")
 }

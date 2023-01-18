@@ -1,3 +1,5 @@
+import bundleAnalyzer from '@next/bundle-analyzer';
+
 // @ts-check
 /**
  * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation.
@@ -5,8 +7,12 @@
  */
 !process.env.SKIP_ENV_VALIDATION && (await import("./src/env/server.mjs"));
 
+const withBundleAnalyzer = bundleAnalyzer({
+  enabled: process.env.ANALYZE === 'true',
+});
+
 /** @type {import("next").NextConfig} */
-const config = {
+const config = withBundleAnalyzer({
   reactStrictMode: true,
   swcMinify: true,
   i18n: {
@@ -32,5 +38,6 @@ const config = {
       },
     ],
   },
-};
+});
+
 export default config;

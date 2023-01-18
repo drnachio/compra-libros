@@ -15,7 +15,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
 }) => {
   return (
     <SessionProvider session={session}>
-      <main className={mainFont.className}>
+      <main className={`${mainFont.className} h-full`}>
         <Component {...pageProps} />
       </main>
     </SessionProvider>
