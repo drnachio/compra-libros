@@ -3,7 +3,6 @@ import Link from 'next/link';
 import { ChevronLeftIcon, ShoppingBagIcon } from '@heroicons/react/20/solid';
 
 import Layout from '../../components/Layout';
-import { profile, tabs } from '../../data/data';
 import ListOfBooks from '../../components/ListOfBooks';
 import type {
   GetStaticPaths,
@@ -18,6 +17,9 @@ import Head from 'next/head';
 import getImageUrlFromFile from '../../utils/getImageUrlFromFile';
 import ImageFromFile from '../../components/ImageFromFile';
 import Markdown from '../../components/Markdown';
+import getBookProperties from '../../utils/getBookProperties';
+import { useState } from 'react';
+import React from 'react';
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ');
@@ -26,8 +28,10 @@ function classNames(...classes: string[]) {
 type PropsType = InferGetStaticPropsType<typeof getStaticProps>;
 
 const Libro: React.FC<PropsType> = ({ slug }) => {
+  const [currentTab, setCurrentTab] = useState<number>(0);
   const bookDetails = api.books.getBookBySlug.useQuery({ slug });
   const tags = (bookDetails?.data?.tags as string[]) || undefined;
+  const tabs = getBookProperties(bookDetails.data);
   return (
     <Layout>
       <Head>
@@ -52,14 +56,14 @@ const Libro: React.FC<PropsType> = ({ slug }) => {
           />
         )}
       </Head>
-      <main className="relative z-0 flex-1 overflow-y-auto focus:outline-none xl:order-last">
+      <main className="relative z-0 flex-1 h-full focus:outline-none xl:order-last">
         {/* Breadcrumb */}
         <nav
           className="flex items-start px-4 py-3 sm:px-6 lg:px-8 xl:hidden"
           aria-label="Breadcrumb"
         >
           <a
-            href="#"
+            href="/libros"
             className="inline-flex items-center space-x-3 text-sm font-medium text-gray-900"
           >
             <ChevronLeftIcon
@@ -70,7 +74,7 @@ const Libro: React.FC<PropsType> = ({ slug }) => {
           </a>
         </nav>
 
-        <article className="overflow-y-auto h-screen pb-20 md:pb-4">
+        <article className="overflow-y-auto h-full">
           {/* Profile header */}
           <div>
             <div className="h-32 w-full bg-gradient-to-br from-pink-300 via-purple-300 to-indigo-400"></div>
@@ -93,18 +97,6 @@ const Libro: React.FC<PropsType> = ({ slug }) => {
                         : 'Cargando...'}{' '}
                     </h1>
                   </div>
-                  <div className="justify-stretch mt-6 flex flex-col space-y-3 sm:flex-row sm:space-y-0 sm:space-x-4">
-                    <button
-                      type="button"
-                      className="inline-flex justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2"
-                    >
-                      <ShoppingBagIcon
-                        className="-ml-1 mr-2 h-5 w-5 text-gray-400"
-                        aria-hidden="true"
-                      />
-                      <span>Comprar en Amazon</span>
-                    </button>
-                  </div>
                 </div>
               </div>
               <div className="mt-6 hidden min-w-0 flex-1 sm:block 2xl:hidden">
@@ -120,19 +112,19 @@ const Libro: React.FC<PropsType> = ({ slug }) => {
             <div className="border-b border-gray-200">
               <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
                 <nav className="-mb-px flex space-x-8" aria-label="Tabs">
-                  {tabs.map((tab) => (
+                  {Object.keys(tabs).map((tab, i) => (
                     <a
-                      key={tab.name}
-                      href={tab.href}
+                      key={tab}
+                      onClick={() => setCurrentTab(i)}
                       className={classNames(
-                        tab.current
+                        i === currentTab
                           ? 'border-pink-500 text-gray-900'
-                          : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700',
+                          : 'border-transparent cursor-pointer text-gray-500 hover:border-gray-300 hover:text-gray-700',
                         'whitespace-nowrap border-b-2 py-4 px-1 text-sm font-medium',
                       )}
-                      aria-current={tab.current ? 'page' : undefined}
+                      aria-current={i === currentTab ? 'page' : undefined}
                     >
-                      {tab.name}
+                      {tab}
                     </a>
                   ))}
                 </nav>
@@ -143,33 +135,73 @@ const Libro: React.FC<PropsType> = ({ slug }) => {
           {/* Description list */}
           <div className="mx-auto mt-6 max-w-5xl px-4 sm:px-6 lg:px-8">
             <dl className="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2">
-              {Object.keys(profile.fields).map((field) => (
-                <div key={field} className="sm:col-span-1">
-                  <dt className="text-sm font-medium text-gray-500">{field}</dt>
-                  <dd className="mt-1 text-sm text-gray-900">
-                    {(profile.fields as { [key: string]: string })[field]}
-                  </dd>
-                </div>
-              ))}
+              {Object.keys(tabs).map((tab, i) =>
+                i === currentTab ? (
+                  <React.Fragment key={tab}>
+                    {Object.keys(tabs[tab] || {}).map((fieldName) =>
+                      fieldName.startsWith('_') ? null : (
+                        <div key={fieldName} className="sm:col-span-1">
+                          <dt className="text-sm font-medium text-gray-500">
+                            {fieldName}
+                          </dt>
+                          <dd className="mt-1 text-sm text-gray-900">
+                            {tabs[tab]?.[fieldName]}
+                          </dd>
+                        </div>
+                      ),
+                    )}
+                    {tabs[tab]?._urlAmazon && (
+                      <div
+                        key={`${tab}_amazonLink`}
+                        className="justify-stretch flex flex-col space-y-3 sm:flex-row sm:space-y-0 sm:space-x-4"
+                      >
+                        <a
+                          href={`https://${tabs[tab]?._urlAmazon || ''}`}
+                          rel="sponsored"
+                          className="inline-flex justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2"
+                        >
+                          <ShoppingBagIcon
+                            className="-ml-1 mr-2 h-5 w-5 text-gray-400"
+                            aria-hidden="true"
+                          />
+                          <span>Comprar Versión {tab} en Amazon</span>
+                        </a>
+                      </div>
+                    )}
+                  </React.Fragment>
+                ) : null,
+              )}
               <div className="sm:col-span-2">
-                <dt className="text-xl font-bold text-gray-900">
-                  Comentario
-                </dt>
-                <dd>
-                  <Markdown>{bookDetails.data?.article || ''}</Markdown>
-                </dd>
-                <dt className="text-xl font-bold text-gray-900 mt-6">
-                  Principales razones para leerlo
-                </dt>
-                <dd>
-                  <Markdown>{bookDetails.data?.keyPoints || ''}</Markdown>
-                </dd>
-                <dt className="text-xl font-bold text-gray-900 mt-6">
-                  Descripción del editor
-                </dt>
-                <dd>
-                  <Markdown>{bookDetails.data?.abstract || ''}</Markdown>
-                </dd>
+                {bookDetails.data?.article && (
+                  <>
+                    <dt className="text-xl font-bold text-gray-900">
+                      Comentario
+                    </dt>
+                    <dd>
+                      <Markdown>{bookDetails.data?.article || ''}</Markdown>
+                    </dd>
+                  </>
+                )}
+                {bookDetails.data?.keyPoints && (
+                  <>
+                    <dt className="text-xl font-bold text-gray-900 mt-6">
+                      Principales razones para leerlo
+                    </dt>
+                    <dd>
+                      <Markdown>{bookDetails.data?.keyPoints || ''}</Markdown>
+                    </dd>
+                  </>
+                )}
+                {bookDetails.data?.abstract && (
+                  <>
+                    <dt className="text-xl font-bold text-gray-900 mt-6">
+                      Descripción del editor
+                    </dt>
+                    <dd>
+                      <Markdown>{bookDetails.data?.abstract || ''}</Markdown>
+                    </dd>
+                  </>
+                )}
               </div>
             </dl>
           </div>
