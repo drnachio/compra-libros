@@ -7,9 +7,12 @@ dotenv.config();
 
 const contentDownloader = async (): Promise<void> => {
   if (process.env.BOOKS_LIST_URL) {
+    console.log('Fetching books list');
     const books = await fetch(process.env.BOOKS_LIST_URL);
+    console.log('Obtaining books text');
     const list = await books.text();
     const parser = new XMLParser();
+    console.log('Parsing books list');
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const listResult = (await parser.parse(list)) as {
       getRecordListXResponse: {
@@ -23,6 +26,7 @@ const contentDownloader = async (): Promise<void> => {
     const isbns = listResult.getRecordListXResponse.records.record.map(
       (c) => c.id,
     );
+    console.log('Saving books list');
     await fs.writeFile('data/isbns.json', JSON.stringify(isbns, null, 2));
     if (process.env.BOOKS_DETAILS_URL) {
       for (let i = 0; i < isbns.length; i++) {
