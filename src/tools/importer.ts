@@ -170,7 +170,12 @@ const contentImporter = async (): Promise<void> => {
                 } else if (!data.OtherText || data.OtherText.length === 0) {
                   logSkippedFiles &&
                     console.error(`No OtherText in ISBN ${file || ''}`);
-                } else if (!data.Publisher || data.Publisher.length === 0) {
+                } else if (
+                  !data.Publisher ||
+                  data.Publisher.length === 0 ||
+                  !data?.Publisher[0]?.PublisherName ||
+                  !data?.Publisher[0]?.NameCodeValue
+                ) {
                   logSkippedFiles &&
                     console.error(`No Publisher in ISBN ${file || ''}`);
                 } else if (
