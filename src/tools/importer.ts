@@ -31,6 +31,9 @@ const contentImporter = async (): Promise<void> => {
             data.MainSubject as unknown,
           ] as MARKMetadata['MainSubject'];
         }
+        if (data.Series && !Array.isArray(data.Series)) {
+          data.Series = [data.Series as unknown] as MARKMetadata['Series'];
+        }
         if (data.Contributor && !Array.isArray(data.Contributor)) {
           data.Contributor = [
             data.Contributor as unknown,
@@ -150,9 +153,20 @@ const contentImporter = async (): Promise<void> => {
                     console.error(
                       `No Bio For Contributor File in ISBN ${file || ''}`,
                     );
+                } else if (!data.Contributor[0]?.PersonNameInverted) {
+                  logSkippedFiles &&
+                    console.error(
+                      `No Personal Name Inverted File in ISBN ${file || ''}`,
+                    );
                 } else if (!data.MediaFile || data.MediaFile.length === 0) {
                   logSkippedFiles &&
                     console.error(`No Media File in ISBN ${file || ''}`);
+                } else if (
+                  !data.MediaFile.find((c) => c.MediaFileTypeCode === 4)
+                    ?.MediaFileLink
+                ) {
+                  logSkippedFiles &&
+                    console.error(`No Cover Image in ISBN ${file || ''}`);
                 } else if (!data.OtherText || data.OtherText.length === 0) {
                   logSkippedFiles &&
                     console.error(`No OtherText in ISBN ${file || ''}`);
