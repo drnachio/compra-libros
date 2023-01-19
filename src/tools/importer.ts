@@ -20,6 +20,11 @@ const contentImporter = async (): Promise<void> => {
             data.MainSubject as unknown,
           ] as MARKMetadata['MainSubject'];
         }
+        if (data.Contributor && !Array.isArray(data.Contributor)) {
+          data.Contributor = [
+            data.Contributor as unknown,
+          ] as MARKMetadata['Contributor'];
+        }
         if (data.Title) {
           if (data.Title && !Array.isArray(data.Title)) {
             data.Title = [data.Title as unknown] as MARKMetadata['Title'];
@@ -52,8 +57,13 @@ const contentImporter = async (): Promise<void> => {
               if (
                 data.MainSubject.some((c) => `${c.SubjectCode}`.startsWith('F'))
               ) {
-                console.log(`Processing book ${file || ''}: ${mainTitle}`);
-                totalProcessed++;
+                if (!data.Contributor) {
+                  logSkippedFiles &&
+                    console.error(`No contributor in ISBN ${file || ''}`);
+                } else {
+                  console.log(`Processing book ${file || ''}: ${mainTitle}`);
+                  totalProcessed++;
+                }
               } else {
                 logSkippedFiles && console.log(`${mainTitle} is not fiction`);
               }
