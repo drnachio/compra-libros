@@ -2,6 +2,8 @@ import * as dotenv from 'dotenv';
 import * as fs from 'node:fs/promises';
 import type { MARKMetadata } from './markTypes';
 
+const notDirectRelationCodes = [2, 24, 25, 22, 23, 30, 45];
+
 dotenv.config();
 
 const logSkippedFiles = false;
@@ -20,6 +22,11 @@ const getDateFromMARCNumber = (dateNumber: number): Date => {
 const contentImporter = async (): Promise<void> => {
   const files = await fs.readdir('data');
   let totalProcessed = 0;
+  const bookDictionary = new Map<number, MARKMetadata>();
+  const contents = new Array<{
+    isbns: number[];
+    datas: MARKMetadata[];
+  }>();
   for (let i = 0; i < files.length; i++) {
     const file = files[i];
     if (file && file.endsWith('.json') && file.length === 22) {
@@ -179,6 +186,15 @@ const contentImporter = async (): Promise<void> => {
                   logSkippedFiles &&
                     console.error(`No Publisher in ISBN ${file || ''}`);
                 } else if (
+                  !data.ProductIdentifier ||
+                  data.ProductIdentifier.length === 0 ||
+                  data.ProductIdentifier.filter((c) => c.ProductIDType === 15)
+                    ?.length !== 1 ||
+                  !data.ProductIdentifier.find((c) => c.ProductIDType === 15)
+                    ?.IDValue
+                ) {
+                  console.error(`No ISBN 13 in ISBN ${file || ''}`);
+                } else if (
                   !data.SupplyDetail ||
                   data.SupplyDetail.length === 0
                 ) {
@@ -205,7 +221,68 @@ const contentImporter = async (): Promise<void> => {
                   logSkippedFiles &&
                     console.error(`No price for ES in ISBN ${file || ''}`);
                 } else {
-                  console.log(`Processing book ${file || ''}: ${mainTitle}`);
+                  const isbn15 =
+                    data.ProductIdentifier.find((c) => c.ProductIDType === 15)
+                      ?.IDValue || 0;
+                  if (bookDictionary.has(isbn15)) {
+                    console.error(`Duplicated ISBN15 ${isbn15}...`);
+                  }
+                  bookDictionary.set(isbn15, data);
+                  // console.log(`Processing book ${file || ''}: ${mainTitle}`);
+                  const isbns = new Array<number>();
+                  isbns.push(isbn15);
+                  let previousContent = contents.findIndex((content) =>
+                    content.isbns.includes(isbn15),
+                  );
+                  if (previousContent === -1 && data.RelatedProduct) {
+                    data.RelatedProduct.forEach((related) => {
+                      if (
+                        related.RelationCode &&
+                        !notDirectRelationCodes.includes(related.RelationCode)
+                      ) {
+                        const relatedIsbn = related.ProductIdentifier.find(
+                          (c) =>
+                            c.ProductIDType === 3 || c.ProductIDType === 15,
+                        )?.IDValue;
+                        if (relatedIsbn) {
+                          if (!isbns.includes(relatedIsbn)) {
+                            isbns.push(relatedIsbn);
+                          }
+                          const newIndex = contents.findIndex((content) =>
+                            content.isbns.includes(relatedIsbn),
+                          );
+                          if (previousContent === -1) {
+                            previousContent = newIndex;
+                          } else if (
+                            newIndex !== -1 &&
+                            newIndex !== previousContent
+                          ) {
+                            console.log(
+                              `Unusual double relation ${relatedIsbn} in ${
+                                file || ''
+                              }`,
+                            );
+                          }
+                        }
+                      }
+                    });
+                  }
+                  if (previousContent === -1) {
+                    contents.push({
+                      isbns,
+                      datas: [data],
+                    });
+                  } else {
+                    const previous = contents[previousContent];
+                    if (previous) {
+                      previous.datas.push(data);
+                      isbns.forEach((isbn) => {
+                        if (!previous.isbns.includes(isbn)) {
+                          previous.isbns.push(isbn);
+                        }
+                      });
+                    }
+                  }
                   totalProcessed++;
                 }
               } else {
@@ -226,6 +303,17 @@ const contentImporter = async (): Promise<void> => {
     }
   }
   console.log(`Total fiction books to process: ${totalProcessed}`);
+  console.log(`${contents.length} unique contents`);
+  const list = contents.map((c) =>
+    c.datas.reduce<string[]>((t, b): string[] => {
+      if (!t.includes(`${b.Title?.[0]?.TitleText || ''}`)) {
+        t.push(`${b.Title?.[0]?.TitleText || ''}`);
+      }
+      return t;
+    }, new Array<string>()),
+  );
+  list.sort((a, b) => a[0]?.localeCompare(b[0] || '') || 0);
+  console.table(list);
 };
 
 contentImporter()
